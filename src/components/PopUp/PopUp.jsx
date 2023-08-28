@@ -14,7 +14,7 @@ const PopUp = ({ modalOpen, setModalOpen, tempingSrc }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleKeyDown]);
+  }, []);
 
   return (
     <div
