@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 const PopUp = ({ modalOpen, setModalOpen, tempingSrc }) => {
   const handleKeyDown = event => {
-    console.log('YOU CLICK BITTON');
     if (event.key === 'Escape' && modalOpen) {
       setModalOpen(false);
     }

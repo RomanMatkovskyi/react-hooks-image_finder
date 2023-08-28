@@ -10,6 +10,7 @@ const App = () => {
   const [data, setData] = useState([]);
   const [currentSearch, setCurrentSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(2);
+  const [maxPage, setMaxPage] = useState(1);
   const [status, setStatus] = useState('idle');
 
   const searchForData = (search, curentPage) => {
@@ -26,6 +27,10 @@ const App = () => {
     axios
       .get(`https://pixabay.com/api/?${params}`)
       .then(imageArray => {
+        console.log(imageArray.data.totalHits);
+        if (imageArray.data.totalHits > 0) {
+          setMaxPage(Math.ceil(imageArray.data.totalHits / 15));
+        }
         if (imageArray.data.hits.length === 0) {
           setStatus('noQuery');
           setData([]);
@@ -82,7 +87,7 @@ const App = () => {
           />
         </div>
       )}
-      {data.length !== 0 && status !== 'noMore' && (
+      {data.length !== 0 && status !== 'noMore' && maxPage >= currentPage && (
         <Button
           currentSearch={currentSearch}
           currentPage={currentPage}
