@@ -1,9 +1,14 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-class Button extends Component {
-  handleLoadMoreData = (search, currentPage) => {
-    this.props.handleLoading('pending');
+const Button = ({
+  currentSearch,
+  currentPage,
+  loadMoreData,
+  handleLoading,
+}) => {
+  const handleLoadMoreData = (search, currentPage) => {
+    handleLoading('pending');
     let params = new URLSearchParams({
       key: '37799813-d6baa13d55c299777f9561755',
       q: search,
@@ -15,36 +20,32 @@ class Button extends Component {
       .get(`https://pixabay.com/api/?${params}`)
       .then(imageArray => {
         if (imageArray.data.hits.length === 0) {
-          this.props.handleLoading('noMore');
+          handleLoading('noMore');
           return;
         }
-        this.props.loadMoreData(imageArray.data.hits);
-        this.props.handleLoading('resolved');
+        loadMoreData(imageArray.data.hits);
+        handleLoading('resolved');
       })
       .catch(error => {
-        this.props.handleLoading('rejected');
+        handleLoading('rejected');
       });
   };
-
-  render() {
-    const { currentSearch, currentPage } = this.props;
-    var Scroll = require('react-scroll');
-    var scroll = Scroll.animateScroll;
-    return (
-      <>
-        <button
-          type="button"
-          className="Button"
-          onClick={() => {
-            this.handleLoadMoreData(currentSearch, currentPage);
-            scroll.scrollToBottom();
-          }}
-        >
-          Load More
-        </button>
-      </>
-    );
-  }
-}
+  var Scroll = require('react-scroll');
+  var scroll = Scroll.animateScroll;
+  return (
+    <>
+      <button
+        type="button"
+        className="Button"
+        onClick={() => {
+          handleLoadMoreData(currentSearch, currentPage);
+          scroll.scrollToBottom();
+        }}
+      >
+        Load More
+      </button>
+    </>
+  );
+};
 
 export default Button;
