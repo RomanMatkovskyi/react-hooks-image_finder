@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const PopUp = ({ modalOpen, setModalOpen, tempingSrc }) => {
   const handleKeyDown = event => {
@@ -13,7 +14,7 @@ const PopUp = ({ modalOpen, setModalOpen, tempingSrc }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleKeyDown]);
 
   return (
     <div
@@ -28,4 +29,11 @@ const PopUp = ({ modalOpen, setModalOpen, tempingSrc }) => {
     </div>
   );
 };
+
 export default PopUp;
+
+PopUp.propTypes = {
+  modalOpen: PropTypes.bool,
+  setModalOpen: PropTypes.func,
+  tempingSrc: PropTypes.string,
+};

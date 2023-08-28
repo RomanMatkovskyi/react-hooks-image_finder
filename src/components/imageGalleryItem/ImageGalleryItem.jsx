@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import PopUp from 'components/PopUp/PopUp';
 
@@ -38,3 +39,7 @@ const ImageGalleryItem = ({ imgData }) => {
 };
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  imgData: PropTypes.object,
+};

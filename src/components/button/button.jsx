@@ -1,4 +1,5 @@
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const Button = ({
   currentSearch,
@@ -48,3 +49,10 @@ const Button = ({
 };
 
 export default Button;
+
+Button.propTypes = {
+  currentSearch: PropTypes.string,
+  currentPage: PropTypes.number,
+  loadMoreData: PropTypes.func,
+  handleLoading: PropTypes.func,
+};

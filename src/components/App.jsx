@@ -27,7 +27,6 @@ const App = () => {
     axios
       .get(`https://pixabay.com/api/?${params}`)
       .then(imageArray => {
-        console.log(imageArray.data.totalHits);
         if (imageArray.data.totalHits > 0) {
           setMaxPage(Math.ceil(imageArray.data.totalHits / 15));
         }
