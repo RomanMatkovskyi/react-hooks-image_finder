@@ -2,19 +2,21 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const PopUp = ({ modalOpen, setModalOpen, tempingSrc }) => {
-  const handleKeyDown = event => {
-    if (event.key === 'Escape' && modalOpen) {
-      setModalOpen(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && modalOpen) {
+        setModalOpen(false);
+      }
+    });
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', event => {
+        if (event.key === 'Escape' && modalOpen) {
+          setModalOpen(false);
+        }
+      });
     };
-  }, [handleKeyDown]);
+  }, []);
 
   return (
     <div
