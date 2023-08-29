@@ -5,13 +5,11 @@ const PopUp = ({ modalOpen, setModalOpen, tempingSrc }) => {
   const onClose = () => {
     setModalOpen(false);
   };
-
-  const handleBackdropClick = e => {
+  function handleBackdropClick(e) {
     if (e.target === e.currentTarget) {
-      setModalOpen(false);
       onClose();
     }
-  };
+  }
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -25,7 +23,7 @@ const PopUp = ({ modalOpen, setModalOpen, tempingSrc }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose]);
+  }, []);
 
   return (
     <div
